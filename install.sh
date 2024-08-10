@@ -9,14 +9,12 @@ if ! command -v brew &> /dev/null; then
 
 	# Brew needs you to do some stuff after installing
 	echo "Please follow the above instructions from brew and re-run the configthing install!"
-	exit 0
-else
-	echo "found brew!"
+	exit 1
 fi
 
-# setup tmux
-if ! command -v tmux &> /dev/null; then
-	brew install tmux
-else
-	echo "found tmux!"
-fi
+# source the install script for each individual program
+for d in ./programs/* ; do
+	pushd "$d"
+	source "install.sh"
+	popd
+done
