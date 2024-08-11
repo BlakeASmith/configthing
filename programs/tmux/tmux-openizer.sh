@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-selected=$(tmux list-sessions | fzf | cut -d':' -f1)
+selected=$(sesh list | fzf)
 tmux switch-client -t $selected || tmux attach -t $selected
