@@ -18,7 +18,10 @@ if ! command -v sesh &> /dev/null; then
 	brew install joshmedeski/sesh/sesh
 fi
 
+# symlink .zshrc
+ln -sf "$(pwd)/zsh/.zshrc" ~/.zshrc
+
 # symlink tmux configuration
 ln -sf "$(pwd)/tmux/tmux.conf" ~/.tmux.conf
-# link scripts to bin
+# link tmux scripts to bin
 ln -sf "$(pwd)/tmux/tmux-openizer.sh" ~/.local/bin/topen
