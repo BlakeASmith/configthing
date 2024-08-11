@@ -18,6 +18,9 @@ fi
 ######## Completion ###############
 zstyle ':completion:*' menu select
 [ -f ~/.zfunc ] && fpath+=~/.zfunc
+[ $(uname) = "Darwin" ] && autoload bashcompinit && bashcompinit \
+    && autoload -Uz compinit && compinit
+
 
 if command -v aws_completer &>/dev/null; then
     complete -C "$(which aws_completer)" aws 
@@ -28,17 +31,16 @@ if command -v go &>/dev/null; then
     [ $(uname) = "Darwin" ] && export PATH=$PATH:/usr/local/go/bin
 fi
 
-[ -f ~/scripts/bin ] && export PATH=$PATH:/Users/blakeasm/scripts/bin
-[ -f ~/.local/bin ] && export PATH=$PATH:/Users/blakeasm/.local/bin
-[ -f ~/.local/scriptthing/bin ] && export PATH=$PATH:/Users/blakeasm/.local/scriptthing/bin
+[ -d ~/scripts/bin ] && export PATH=$PATH:$HOME/scripts/bin
+[ -d ~/configthing/bin ] && export PATH=$PATH:$HOME/configthing/bin
+[ -d ~/configthing/priv/bin ] && export PATH=$PATH:$HOME/configthing/priv/bin
+[ -d ~/.local/bin ] && export PATH=$PATH:$HOME/.local/bin/
+[ -d ~/.local/scriptthing/bin ] && export PATH=$PATH:$HOME.local/scriptthing/bin
 
 export PATH=$PATH:/Users/blakeasm/.local/scriptthing/bin
 export PATH=$PATH:/Users/blakeasm/.local/bin
 
 [ -f ~/scripts/source_shell_extensions.sh ] && source ~/scripts/source_shell_extensions.sh
 
-autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && enable-fzf-tab
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
 
