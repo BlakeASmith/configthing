@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source ./sh/common/platforms.sh
-
 # setup brew, since it works on both Mac and Linux
 # https://brew.sh/ says that this will work on both
 if ! command -v brew &> /dev/null; then
@@ -12,9 +10,15 @@ if ! command -v brew &> /dev/null; then
 	exit 1
 fi
 
-# source the install script for each individual program
-for d in ./programs/* ; do
-	pushd "$d"
-	source "install.sh"
-	popd
-done
+if ! command -v tmux &> /dev/null; then
+	brew install tmux
+fi
+
+if ! command -v sesh &> /dev/null; then
+	brew install joshmedeski/sesh/sesh
+fi
+
+# symlink tmux configuration
+ln -sf "$(pwd)/tmux/tmux.conf" ~/.tmux.conf
+# link scripts to bin
+ln -sf "$(pwd)/tmux/tmux-openizer.sh" ~/.local/bin/topen
