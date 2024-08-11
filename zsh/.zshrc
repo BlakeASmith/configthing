@@ -18,7 +18,7 @@ fi
 ######## Completion ###############
 zstyle ':completion:*' menu select
 [ -f ~/.zfunc ] && fpath+=~/.zfunc
-[ $(uname) = "Darwin" ] && autoload bashcompinit && bashcompinit \
+autoload bashcompinit && bashcompinit \
     && autoload -Uz compinit && compinit
 
 
